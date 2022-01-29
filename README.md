@@ -2,6 +2,10 @@
 
 ![image](https://user-images.githubusercontent.com/63655402/151653747-c70a2dc0-8700-41d0-b1ef-997173b21874.png)
 
+## Link to Live Demo
+
+[Delivery Fee Calculator Demo](http://delivery-calculator.vercel.app/)
+
 ## Available Scripts
 
 In the project directory, you can run:
