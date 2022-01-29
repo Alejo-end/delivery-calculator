@@ -1,3 +1,8 @@
+#Delivery Fee Calculator - Wolt Internship Test 2022 
+
+![image](https://user-images.githubusercontent.com/63655402/151653747-c70a2dc0-8700-41d0-b1ef-997173b21874.png)
+
+
 This project was bootstrapped with
 [Create React App](https://github.com/facebook/create-react-app).
 
