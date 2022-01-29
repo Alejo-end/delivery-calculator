@@ -1,10 +1,6 @@
-#Delivery Fee Calculator - Wolt Internship Test 2022 
+# Delivery Fee Calculator - Wolt Internship Test 2022 
 
 ![image](https://user-images.githubusercontent.com/63655402/151653747-c70a2dc0-8700-41d0-b1ef-997173b21874.png)
-
-
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -55,10 +51,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for
 small and middle deployments, and you shouldn’t feel obligated to use this
 feature. However we understand that this tool wouldn’t be useful if you couldn’t
 customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
