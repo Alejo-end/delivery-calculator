@@ -132,7 +132,7 @@ export const App = () => {
         <Grid h="100vh">
           <ColorModeSwitcher justifySelf="flex-end" />
           <VStack spacing={2}>
-            <Logo width={80} />
+            <Logo width={90} />
             <Text size="xl">Welcome to the Delivery Fee Calculator</Text>
             <BaseCard>
               <TextInput
