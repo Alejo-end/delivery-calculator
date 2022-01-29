@@ -1,24 +1,24 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from "react";
 import {
   ChakraProvider,
   Box,
   Text,
-  VStack,
   Grid,
   theme,
   createStandaloneToast,
-} from '@chakra-ui/react';
-import { BaseCard } from './components/BaseCard';
-import { ColorModeSwitcher } from './components/ColorModeSwitcher';
-import { Price } from './components/Price';
-import { TextInput } from './components/TextInput';
-import useDebounce from './hooks/useDebounce';
-import { Logo } from './components/Logo';
-import { Footer } from './components/Footer';
+  VStack,
+} from "@chakra-ui/react";
+import { BaseCard } from "./components/BaseCard";
+import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
+import { Price } from "./components/Price";
+import { TextInput } from "./components/TextInput";
+import useDebounce from "./hooks/useDebounce";
+import { Logo } from "./components/Logo";
+import { Footer } from "./components/Footer";
 
 //Friday Rush Multiplier Toast
 const toast = createStandaloneToast();
-const id = 'multiplier-toast';
+const id = "multiplier-toast";
 
 const calculateFinalPrice = (
   cartValue: number,
@@ -53,12 +53,12 @@ const calculateFinalPrice = (
     if (!toast.isActive(id)) {
       toast({
         id,
-        title: '🔥🛵💨 Friday Rush Multiplier!',
-        position:'top',
+        title: "🔥🛵💨 Friday Rush Multiplier!",
+        position: "top",
         isClosable: true,
-        variant: 'solid',
+        variant: "solid",
         containerStyle: {
-          backgroundColor: '#009de0',
+          backgroundColor: "#009de0",
           borderRadius: 10,
         },
       });
@@ -121,46 +121,46 @@ export const App = () => {
       const nowTime = new Date().getTime();
 
       if (dateTime - nowTime <= 0)
-        alert('Delivery date cannot be less or equal to this moment');
+        alert("Delivery date cannot be less or equal to this moment");
 
       setDeliveryDate(date);
     }, []);
 
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign='center' fontSize='xl'>
-        <Grid minH='100vh'>
-          <ColorModeSwitcher justifySelf='flex-end' />
-          <VStack spacing={4}>
-            <Logo width={100} />
-            <Text size='xl'>Welcome to the Delivery Fee Calculator</Text>
+      <Box textAlign="center">
+        <Grid h="100vh">
+          <ColorModeSwitcher justifySelf="flex-end" />
+          <VStack spacing={2}>
+            <Logo width={80} />
+            <Text size="xl">Welcome to the Delivery Fee Calculator</Text>
             <BaseCard>
               <TextInput
-                text='Cart Value'
-                placeholderText='Enter the food price...'
-                sign='💶'
+                text="Cart Value"
+                placeholderText="Enter the food price..."
+                sign="💶"
                 onChange={handleCartValueChange}
-                inputType='number'
+                inputType="number"
               />
               <TextInput
-                text='Delivery Distance'
-                placeholderText='Distance in meters...'
-                sign='🛣️'
+                text="Delivery Distance"
+                placeholderText="Distance in meters..."
+                sign="🛣️"
                 onChange={handleDeliveryDistanceChange}
-                inputType='number'
+                inputType="number"
               />
               <TextInput
-                text='Amount of Items'
-                placeholderText='Up to 4 items for free!'
+                text="Amount of Items"
+                placeholderText="Up to 4 items for free!"
                 onChange={handleCartQtyChange}
-                sign='🛍️'
-                inputType='number'
+                sign="🛍️"
+                inputType="number"
               />
               <TextInput
-                text='Time'
+                text="Time"
                 placeholderText="When's the delivery?"
-                sign='📅'
-                inputType='datetime-local'
+                sign="📅"
+                inputType="datetime-local"
                 onChange={handleDeliveryDateChange}
               />
               <Price amount={finalPrice} />
