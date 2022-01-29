@@ -10,7 +10,7 @@ export const Footer = (props: TextProps) => (
       color="white"
       className="footer"
       px={4}
-      mt={10}
+      mt={5}
       h={10}
     >
       <Text fontSize="sm" {...props}>

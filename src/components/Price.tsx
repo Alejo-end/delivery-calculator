@@ -1,4 +1,4 @@
-import { HStack, Text } from '@chakra-ui/react';
+import { HStack, Text } from "@chakra-ui/react";
 
 interface PriceProps {
   amount: number;
@@ -7,10 +7,12 @@ interface PriceProps {
 
 export const Price = ({ amount, color }: PriceProps) => {
   return (
-    <HStack>
-      <Text fontSize='1rem' fontWeight='medium'>Final Price</Text>
-      <Text fontSize='2rem' fontWeight='wide' color={'currentcolor'} as='i'>
-        {amount.toFixed(2) + ' €'}
+    <HStack spacing={5}>
+      <Text fontSize="1.5rem" fontWeight="extrabold">
+        Final Price is:
+      </Text>
+      <Text fontSize="2rem" fontWeight="semibold" color={color} as="em">
+        {amount.toFixed(2) + " €"}
       </Text>
     </HStack>
   );

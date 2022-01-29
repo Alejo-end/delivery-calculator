@@ -11,7 +11,7 @@ import {
 import { BaseCard } from "./components/BaseCard";
 import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
 import { Price } from "./components/Price";
-import { TextInput } from "./components/TextInput";
+import { FormInput } from "./components/FormInput";
 import useDebounce from "./hooks/useDebounce";
 import { Logo } from "./components/Logo";
 import { Footer } from "./components/Footer";
@@ -28,22 +28,23 @@ const calculateFinalPrice = (
 ): number => {
   let finalPrice = cartValue;
 
-  // Cart value
+  // Cart value surcharge for 10 euros.
   let surcharge = 0;
   if (cartValue < 10.0) surcharge = 10 - cartValue;
 
-  // Delivery fees
+  // Distance delivery surcharge.
   let deliveryFee = 0.0;
   if (deliveryDistance < 1000) deliveryFee += 2;
   if (deliveryDistance >= 1000)
     deliveryFee += Math.ceil(deliveryDistance / 500);
-
+  
+  // Items quantity surcharge.
   let qtyFee = cartQty >= 5 ? 0.5 * (cartQty - 4) : 0;
 
   // Total fee sum
   deliveryFee += qtyFee + surcharge;
 
-  // Date - 5 is friday
+  // Date surcharge for the Friday Rush.
   const day = deliveryDate.getUTCDay();
   const hour = deliveryDate.getUTCHours();
 
@@ -65,8 +66,13 @@ const calculateFinalPrice = (
     }
   }
 
+  // Delivery fee can't be more than 15 euros.
   deliveryFee = Math.min(15, deliveryFee);
   finalPrice += deliveryFee;
+
+  if(cartQty === 0 && deliveryDistance === 0 && cartValue === 0) {
+    finalPrice = 0;
+  }
 
   return finalPrice;
 };
@@ -77,10 +83,11 @@ export const App = () => {
   const [deliveryDistance, setDeliveryDistance] = useState<number>(0);
   const [deliveryDate, setDeliveryDate] = useState<Date>(new Date());
 
-  const [debouncedCartValue] = useDebounce(cartValue, 700);
-  const [debouncedCartQty] = useDebounce(cartQty, 700);
-  const [debouncedDeliveryDistance] = useDebounce(deliveryDistance, 700);
+  const [debouncedCartValue] = useDebounce(cartValue, 600);
+  const [debouncedCartQty] = useDebounce(cartQty, 600);
+  const [debouncedDeliveryDistance] = useDebounce(deliveryDistance, 600);
 
+  // Using useDebounce to avoid unnecessary re-renders.
   const finalPrice = useMemo(
     () =>
       calculateFinalPrice(
@@ -96,7 +103,8 @@ export const App = () => {
       deliveryDate,
     ]
   );
-
+  
+  // Handling events from input components.
   const handleCartValueChange: React.ChangeEventHandler<HTMLInputElement> =
     useCallback((e) => {
       e.target.value && setCartValue(parseInt(e.target.value));
@@ -135,35 +143,39 @@ export const App = () => {
             <Logo width={90} />
             <Text size="xl">Welcome to the Delivery Fee Calculator</Text>
             <BaseCard>
-              <TextInput
+              <FormInput
                 text="Cart Value"
                 placeholderText="Enter the food price..."
                 sign="💶"
                 onChange={handleCartValueChange}
                 inputType="number"
+                label="Cart Value"
               />
-              <TextInput
+              <FormInput
                 text="Delivery Distance"
                 placeholderText="Distance in meters..."
                 sign="🛣️"
                 onChange={handleDeliveryDistanceChange}
                 inputType="number"
+                label="Delivery Distance"
               />
-              <TextInput
+              <FormInput
                 text="Amount of Items"
-                placeholderText="Up to 4 items for free!"
+                placeholderText="4 items for free!"
                 onChange={handleCartQtyChange}
                 sign="🛍️"
                 inputType="number"
+                label="Amount of Items"
               />
-              <TextInput
+              <FormInput
                 text="Time"
                 placeholderText="When's the delivery?"
                 sign="📅"
                 inputType="datetime-local"
                 onChange={handleDeliveryDateChange}
+                label="Delivery Time"
               />
-              <Price amount={finalPrice} />
+              <Price amount={finalPrice} color='#009de0' />
             </BaseCard>
           </VStack>
           <Footer />
