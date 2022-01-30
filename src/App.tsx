@@ -18,7 +18,7 @@ import { Footer } from "./components/Footer";
 
 //Friday Rush Multiplier Toast
 const toast = createStandaloneToast();
-const id = "multiplier-toast";
+const id = "toast";
 
 const calculateFinalPrice = (
   cartValue: number,
@@ -37,7 +37,7 @@ const calculateFinalPrice = (
   if (deliveryDistance < 1000) deliveryFee += 2;
   if (deliveryDistance >= 1000)
     deliveryFee += Math.ceil(deliveryDistance / 500);
-  
+
   // Items quantity surcharge.
   let qtyFee = cartQty >= 5 ? 0.5 * (cartQty - 4) : 0;
 
@@ -70,7 +70,7 @@ const calculateFinalPrice = (
   deliveryFee = Math.min(15, deliveryFee);
   finalPrice += deliveryFee;
 
-  if(cartQty === 0 && deliveryDistance === 0 && cartValue === 0) {
+  if (cartQty === 0 && deliveryDistance === 0 && cartValue === 0) {
     finalPrice = 0;
   }
 
@@ -103,7 +103,7 @@ export const App = () => {
       deliveryDate,
     ]
   );
-  
+
   // Handling events from input components.
   const handleCartValueChange: React.ChangeEventHandler<HTMLInputElement> =
     useCallback((e) => {
@@ -129,8 +129,17 @@ export const App = () => {
       const nowTime = new Date().getTime();
 
       if (dateTime - nowTime <= 0)
-        alert("Delivery date cannot be less or equal to this moment");
-
+      if (!toast.isActive(id)) {
+        toast({
+          title: "📅 Delivery date cannot be less or equal to this moment",
+          id,
+          status: "error",
+          isClosable: true,
+          duration: 5000,
+          position: "top",
+          variant: "solid",
+        });
+      }
       setDeliveryDate(date);
     }, []);
 
@@ -175,7 +184,7 @@ export const App = () => {
                 onChange={handleDeliveryDateChange}
                 label="Delivery Time"
               />
-              <Price amount={finalPrice} color='#009de0' />
+              <Price amount={finalPrice} color="#009de0" />
             </BaseCard>
           </VStack>
           <Footer />

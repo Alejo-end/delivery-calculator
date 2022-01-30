@@ -13,6 +13,7 @@ interface FormInputProps {
   inputType?: string;
   placeholderText?: string;
   sign?: string;
+  regex?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   label: string;
 }
@@ -21,6 +22,7 @@ export const FormInput = ({
   text,
   placeholderText,
   sign,
+  regex,
   inputType,
   onChange,
   label,
@@ -43,6 +45,7 @@ export const FormInput = ({
             aria-label={label}
             colorScheme="#009de0"
             type={inputType}
+            pattern={regex}
             onChange={onChange}
           />
           <InputRightElement

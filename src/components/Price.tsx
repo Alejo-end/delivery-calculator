@@ -11,7 +11,7 @@ export const Price = ({ amount, color }: PriceProps) => {
       <Text fontSize="1.5rem" fontWeight="extrabold">
         Final Price is:
       </Text>
-      <Text fontSize="2rem" fontWeight="semibold" color={color} as="em">
+      <Text fontSize="2rem" fontWeight="semibold" color={color} as="em" aria-label="price">
         {amount.toFixed(2) + " €"}
       </Text>
     </HStack>
