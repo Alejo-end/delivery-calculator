@@ -129,17 +129,17 @@ export const App = () => {
       const nowTime = new Date().getTime();
 
       if (dateTime - nowTime <= 0)
-      if (!toast.isActive(id)) {
-        toast({
-          title: "📅 Delivery date cannot be less or equal to this moment",
-          id,
-          status: "error",
-          isClosable: true,
-          duration: 5000,
-          position: "top",
-          variant: "solid",
-        });
-      }
+        if (!toast.isActive(id)) {
+          toast({
+            title: "📅 Delivery date cannot be less or equal to this moment",
+            id,
+            status: "error",
+            isClosable: true,
+            duration: 5000,
+            position: "top",
+            variant: "solid",
+          });
+        }
       setDeliveryDate(date);
     }, []);
 

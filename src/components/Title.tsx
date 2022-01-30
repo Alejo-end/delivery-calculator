@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import { Text } from "@chakra-ui/react";
 
 interface TitleProps {
   text: string;
@@ -10,9 +10,9 @@ interface TitleProps {
 export const Title = ({ text, size, fontWeight, color }: TitleProps) => {
   return (
     <Text
-      fontSize={size || '1rem'}
-      fontWeight={fontWeight || 'normal'}
-      color={color || 'black'}
+      fontSize={size || "1rem"}
+      fontWeight={fontWeight || "normal"}
+      color={color || "black"}
     >
       {text}
     </Text>

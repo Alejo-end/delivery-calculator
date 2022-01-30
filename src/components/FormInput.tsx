@@ -40,7 +40,7 @@ export const FormInput = ({
         </FormLabel>
         <InputGroup>
           <Input
-          variant="flushed"
+            variant="flushed"
             placeholder={placeholderText}
             aria-label={label}
             colorScheme="#009de0"
