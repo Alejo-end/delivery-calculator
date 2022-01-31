@@ -1,139 +1,15 @@
-import { useCallback, useMemo, useState } from "react";
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Grid,
-  theme,
-  createStandaloneToast,
-  VStack,
-} from "@chakra-ui/react";
-import { BaseCard } from "./components/BaseCard";
-import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
-import { Price } from "./components/Price";
-import { FormInput } from "./components/FormInput";
-import useDebounce from "./hooks/useDebounce";
-import { Logo } from "./components/Logo";
-import { Footer } from "./components/Footer";
-import { calculateFinalPrice } from "./utils";
+import { ChakraProvider, Box, Grid, theme } from "@chakra-ui/react";
+import { Footer, ColorModeSwitcher } from "./components";
+import { Calculator } from "./views/Calculator";
 
-//Not available date Toast
-const toast = createStandaloneToast();
-const id = "toast";
-
-export const App = () => {
-  const [cartValue, setCartValue] = useState<number>(0);
-  const [cartQty, setCartQty] = useState<number>(0);
-  const [deliveryDistance, setDeliveryDistance] = useState<number>(0);
-  const [deliveryDate, setDeliveryDate] = useState<Date>(new Date());
-
-  const [debouncedCartValue] = useDebounce(cartValue, 600);
-  const [debouncedCartQty] = useDebounce(cartQty, 600);
-  const [debouncedDeliveryDistance] = useDebounce(deliveryDistance, 600);
-
-  // Using useDebounce to avoid unnecessary re-renders.
-  const finalPrice = useMemo(
-    () =>
-      calculateFinalPrice(
-        debouncedCartValue,
-        debouncedDeliveryDistance,
-        debouncedCartQty,
-        deliveryDate
-      ),
-    [
-      debouncedCartValue,
-      debouncedDeliveryDistance,
-      debouncedCartQty,
-      deliveryDate,
-    ]
-  );
-
-  // Handling events from input components.
-  const handleCartValueChange: React.ChangeEventHandler<HTMLInputElement> =
-    useCallback((e) => {
-      e.target.value && setCartValue(parseInt(e.target.value));
-    }, []);
-
-  const handleDeliveryDistanceChange: React.ChangeEventHandler<HTMLInputElement> =
-    useCallback((e) => {
-      e.target.value && setDeliveryDistance(parseInt(e.target.value));
-    }, []);
-
-  const handleCartQtyChange: React.ChangeEventHandler<HTMLInputElement> =
-    useCallback((e) => {
-      e.target.value && setCartQty(parseInt(e.target.value));
-    }, []);
-
-  const handleDeliveryDateChange: React.ChangeEventHandler<HTMLInputElement> =
-    useCallback((e) => {
-      if (!e.target.value) return;
-      const date = new Date(e.target.value);
-
-      const dateTime = date.getTime();
-      const nowTime = new Date().getTime();
-
-      if (dateTime - nowTime <= 0)
-        if (!toast.isActive(id)) {
-          toast({
-            title: "📅 Delivery date cannot be less or equal to this moment",
-            id,
-            status: "error",
-            isClosable: true,
-            duration: 5000,
-            position: "top",
-            variant: "solid",
-          });
-        }
-      setDeliveryDate(date);
-    }, []);
-
-  return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center">
-        <Grid h="100vh">
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={2}>
-            <Logo width={90} />
-            <Text size="xl">Welcome to the Delivery Fee Calculator</Text>
-            <BaseCard>
-              <FormInput
-                text="Cart Value"
-                placeholderText="Enter the food price..."
-                sign="💶"
-                onChange={handleCartValueChange}
-                inputType="number"
-                label="Cart Value"
-              />
-              <FormInput
-                text="Delivery Distance"
-                placeholderText="Distance in meters..."
-                sign="🛣️"
-                onChange={handleDeliveryDistanceChange}
-                inputType="number"
-                label="Delivery Distance"
-              />
-              <FormInput
-                text="Amount of Items"
-                placeholderText="4 items for free!"
-                onChange={handleCartQtyChange}
-                sign="🛍️"
-                inputType="number"
-                label="Amount of Items"
-              />
-              <FormInput
-                text="Time"
-                placeholderText="When's the delivery?"
-                sign="📅"
-                inputType="datetime-local"
-                onChange={handleDeliveryDateChange}
-                label="Delivery Time"
-              />
-              <Price amount={finalPrice} color="#009de0" />
-            </BaseCard>
-          </VStack>
-          <Footer />
-        </Grid>
-      </Box>
-    </ChakraProvider>
-  );
-};
+export const App = () => (
+  <ChakraProvider theme={theme}>
+    <Box textAlign="center">
+      <Grid h="100vh">
+        <ColorModeSwitcher justifySelf="flex-end" />
+        <Calculator />
+        <Footer />
+      </Grid>
+    </Box>
+  </ChakraProvider>
+);
