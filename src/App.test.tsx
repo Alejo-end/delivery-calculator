@@ -5,7 +5,7 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import { render } from "./test-utils";
+import { render } from "./utils/test-utils";
 import { App } from "./App";
 
 beforeEach(() => {
@@ -19,6 +19,7 @@ const setup = () => {
   const inputCartValue = screen.getAllByLabelText(/Cart Value/i);
   const inputDistance = screen.getAllByLabelText(/Delivery Distance/i);
   const inputItems = screen.getAllByLabelText(/Amount of Items/i);
+  const inputDate = screen.getAllByLabelText(/Delivery Date/i);
   const finalPrice = screen.getAllByLabelText(/price/i);
 
   return {
@@ -26,6 +27,7 @@ const setup = () => {
     inputDistance,
     inputItems,
     finalPrice,
+    inputDate,
     utils,
   };
 };
@@ -49,11 +51,18 @@ test("should add amount of items", () => {
   expect(inputItems[0]).toHaveValue(4);
 });
 
+test("should add delivery date", () => {
+  const { inputDate } = setup();
+  fireEvent.change(inputDate[0], { target: { value: "2022-06-01T10:00" } });
+  expect(inputDate[0]).toHaveValue("2022-06-01T10:00");
+});
+
 test("renders final price of calculation", () => {
-  const { finalPrice, inputCartValue, inputDistance, inputItems } = setup();
+  const { finalPrice, inputCartValue, inputDistance, inputItems, inputDate } = setup();
   fireEvent.change(inputCartValue[0], { target: { value: 10 } });
   fireEvent.change(inputDistance[0], { target: { value: 1000 } });
   fireEvent.change(inputItems[0], { target: { value: 4 } });
+  fireEvent.change(inputDate[0], { target: { value: "2022-06-01T10:00" } });
   waitFor(() => expect(finalPrice[0]).toHaveTextContent("12.00 €"));
 });
 

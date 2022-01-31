@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
 import { Text, useToast, VStack } from "@chakra-ui/react";
 import { BaseCard, Price, Logo, FormInput } from "../components";
-import useDebounce from "../hooks/useDebounce";
-import { calculateFinalPrice } from "../utils/calculateFinalPrice";
+import { useDebounce } from "../hooks/useDebounce";
+import { calculateFinalPrice } from "../hooks/calculateFinalPrice";
 
 export const Calculator = () => {
   //Not available date Toast
@@ -84,7 +84,7 @@ export const Calculator = () => {
       <BaseCard>
         <FormInput
           text="Cart Value"
-          placeholderText="Enter the food price..."
+          placeholderText="Enter the cart value in €"
           sign="💶"
           onChange={handleCartValueChange}
           inputType="number"
@@ -92,7 +92,7 @@ export const Calculator = () => {
         />
         <FormInput
           text="Delivery Distance"
-          placeholderText="Distance in meters..."
+          placeholderText="Enter distance in meters"
           sign="🛣️"
           onChange={handleDeliveryDistanceChange}
           inputType="number"
@@ -107,7 +107,7 @@ export const Calculator = () => {
           label="Amount of Items"
         />
         <FormInput
-          text="Time"
+          text="Delivery Date"
           placeholderText="When's the delivery?"
           sign="📅"
           inputType="datetime-local"
