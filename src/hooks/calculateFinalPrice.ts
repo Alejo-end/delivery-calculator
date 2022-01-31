@@ -11,10 +11,10 @@ export const calculateFinalPrice = (
   deliveryDate: Date
 ): number => {
   // Discarting negative values
-  if (cartValue < 0) {
+  if (cartValue < 0 || deliveryDistance < 0 || cartQty < 0) {
     if (!toast.isActive(id)) {
       toast({
-        title: "Cart Value cannot be negative",
+        title: "Values cannot be negative",
         id,
         status: "error",
         isClosable: true,
