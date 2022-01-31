@@ -1,7 +1,6 @@
 import {
   cleanup,
   fireEvent,
-  prettyDOM,
   screen,
   waitFor,
 } from "@testing-library/react";
@@ -34,7 +33,6 @@ const setup = () => {
 
 test("should add cart value", () => {
   const { inputCartValue } = setup();
-  console.log(prettyDOM(inputCartValue[0]));
   fireEvent.change(inputCartValue[0], { target: { value: 10 } });
   expect(inputCartValue[0]).toHaveValue(10);
 });
