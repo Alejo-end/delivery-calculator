@@ -4,7 +4,7 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import { render } from "./utils/test-utils";
+import { render } from "./utils/testUtils";
 import { App } from "./App";
 
 beforeEach(() => {

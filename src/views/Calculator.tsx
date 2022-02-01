@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { Text, useToast, VStack } from "@chakra-ui/react";
 import { BaseCard, Price, Logo, FormInput } from "../components";
 import { useDebounce } from "../hooks/useDebounce";
-import { calculateFinalPrice } from "../hooks/calculateFinalPrice";
+import { calculateFinalPrice } from "../utils/calculateFinalPrice";
 
 export const Calculator = () => {
   //Not available date Toast
