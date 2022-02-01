@@ -112,7 +112,7 @@ export const Calculator = () => {
           sign="📅"
           inputType="datetime-local"
           onChange={handleDeliveryDateChange}
-          label="Delivery Time"
+          label="Delivery Date"
         />
         <Price amount={finalPrice} color="#009de0" />
       </BaseCard>
