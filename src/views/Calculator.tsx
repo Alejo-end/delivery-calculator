@@ -83,36 +83,32 @@ export const Calculator = () => {
       <Text size="xl">Welcome to the Delivery Fee Calculator</Text>
       <BaseCard>
         <FormInput
-          text="Cart Value"
+          label="Cart Value"
           placeholderText="Enter the cart value in €"
           sign="💶"
           onChange={handleCartValueChange}
           inputType="number"
-          label="Cart Value"
         />
         <FormInput
-          text="Delivery Distance"
+          label="Delivery Distance"
           placeholderText="Enter distance in meters"
           sign="🛣️"
           onChange={handleDeliveryDistanceChange}
           inputType="number"
-          label="Delivery Distance"
         />
         <FormInput
-          text="Amount of Items"
+          label="Amount of Items"
           placeholderText="4 items for free!"
           onChange={handleCartQtyChange}
           sign="🛍️"
           inputType="number"
-          label="Amount of Items"
         />
         <FormInput
-          text="Delivery Date"
+          label="Delivery Date"
           placeholderText="When's the delivery?"
           sign="📅"
           inputType="datetime-local"
           onChange={handleDeliveryDateChange}
-          label="Delivery Date"
         />
         <Price amount={finalPrice} color="#009de0" />
       </BaseCard>

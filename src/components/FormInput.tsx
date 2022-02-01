@@ -8,27 +8,25 @@ import {
 } from "@chakra-ui/react";
 
 interface FormInputProps {
-  text: string;
+  label: string;
   func?: string;
   inputType?: string;
   placeholderText?: string;
   sign?: string;
   regex?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  label: string;
 }
 
 export const FormInput = ({
-  text,
+  label,
   placeholderText,
   sign,
   regex,
   inputType,
   onChange,
-  label,
 }: FormInputProps) => {
   return (
-    <FormControl id={label}>
+    <FormControl>
       <HStack padding={5} w="full">
         <FormLabel
           fontSize={{ base: "md", md: "xl" }}
@@ -36,7 +34,7 @@ export const FormInput = ({
           color="currentcolor"
           textAlign="left"
         >
-          {text}
+          {label}
         </FormLabel>
         <InputGroup>
           <Input
